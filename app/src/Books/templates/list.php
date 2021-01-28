@@ -13,6 +13,7 @@
         <tr>
             <td><?= $book->title ?></td>
             <td><?= $book->author->first_name ?> <?= $book->author->last_name ?></td>
+            <td><?= $book->author->first_name ?> <?= $book->author->last_name ?></td>
         </tr>
     <?php endforeach; ?>
 </table>

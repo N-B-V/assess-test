@@ -32,9 +32,11 @@ class BooksController
             }
         }
 
+
         $renderer = new PhpRenderer('../src/Books/templates/');
         return $renderer->render($response, 'list.php', [
             'books' => $books,
+
         ]);
     }
 
@@ -47,7 +49,7 @@ class BooksController
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_exec($ch);
             curl_close($ch);
-
+//            die(var_dump($params['price']));
             // Redirect back to book listing
             return $response->withStatus(302)->withHeader('Location', '/books');
         }
@@ -58,10 +60,17 @@ class BooksController
         $authors = json_decode(curl_exec($ch));
         curl_close($ch);
 
+        // Get all the currencies
+        $ch = curl_init('http://api.localtest.me/currencies');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $currencies = json_decode(curl_exec($ch));
+        curl_close($ch);
+
         $renderer = new PhpRenderer('../src/Books/templates/');
 
         return $renderer->render($response, 'create.php', [
             'authors' => $authors,
+            'currencies' => $currencies
         ]);
     }
 }

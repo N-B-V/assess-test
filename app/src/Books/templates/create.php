@@ -1,6 +1,7 @@
 <?php
 /**
  * @var array $authors
+ * @var array $currencies
  */
 ?>
 <form method="get" action="">
@@ -21,11 +22,12 @@
             <td><input type="text" name="title" /> </td>
         </tr>
 
+        <?php foreach ($currencies as $currency): ?>
         <tr>
-            <td>Price (ZAR)</td>
-            <td><input type="text" name="price[ZAR]" /></td>
+            <td>Price (<?= $currency->iso ?>)</td>
+            <td><input type="text" name="price[<?= $currency->iso ?>]" /></td>
         </tr>
-
+        <?php endforeach; ?>
         <tr>
             <td colspan="2" align="right">
                 <input type="submit" value="Create" />
